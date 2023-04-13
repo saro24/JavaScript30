@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Event Capture, Propagation, and Bubbling</title>
+    <style>
+      #outer, #middle, #inner {
+        width: 100px;
+        height: 100px;
+        margin: 20px;
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="outer">
+      <div id="middle">
+        <div id="inner"></div>
+      </div>
+    </div>
+
+    <script>
+
+const outer = document.querySelector("#outer");
+const middle = document.querySelector("#middle");
+const inner = document.querySelector("#inner");
+
+function logEvent(event) {
+  console.log(event.currentTarget.id, event.type);
+}
+
+outer.addEventListener("click", logEvent, true); // capture phase
+middle.addEventListener("click", logEvent, true); // capture phase
+inner.addEventListener("click", logEvent, true); // capture phase
+inner.addEventListener("click", logEvent); // bubbling phase
+middle.addEventListener("click", logEvent); // bubbling phase
+outer.addEventListener("click", logEvent); // bubbling phase
+
+
+    </script>
+  </body>
+</html>
